@@ -124,6 +124,3 @@ MIT License - feel free to use this code for your own portfolio website.
 - **Email**: zmarabeas@gmail.com
 - **GitHub**: github.com/zmarabeas
 - **Phone**: 734-751-0417
-
-v1.0
-
