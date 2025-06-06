@@ -1,0 +1,2885 @@
+can you create a super simple and concise restaraunt website for my client to
+view the menu, hours, and other basic information, and place orders from our site
+and have them sent to the restaraunt. we can use nextjs for the frontend and 
+implement heartland payment systems for processing payments, and have optional
+in store payments. we can send orders to the restaraunt to the server i've 
+created in the store that has an enpoint exposed with ngrok. 
+
+here is the menu in json:
+
+export const menuPrices = {
+
+
+
+    "pizza": {
+        'slice': {
+            'base': 2.75,
+            'toppings': 0.50,
+        },
+        'stuffed': {
+            'base': 7.40,
+            'toppings': 1.05,
+        },
+        'small': {
+            'base': 11.35,
+            'toppings': 1.35,
+        },
+        'medium': {
+            'base': 13.85,
+            'toppings': 1.70,
+        },
+        'large': {
+            'base': 17.00,
+            'toppings': 1.95,
+        },
+        'extra large': {
+            'base': 20.85,
+            'toppings': 2.25,
+        },
+        'tray': {
+            'base': 26,
+            'toppings': 3.8,
+        },
+        'u bake (small)': {
+            'base': 6.85,
+            'toppings': 1.0,
+        },
+        'u bake (large)': {
+            'base': 9.60,
+            'toppings': 1.50,
+        },
+        'twins': {
+            'small': {
+                'base': 20.25,
+                'toppings': 2.45
+            },
+            'medium': {
+                'base': 24.35,
+                'toppings': 3.10
+            },
+            'large': {
+                'base': 29.10,
+                'toppings': 3.65
+            },
+        }
+    },
+
+
+
+    "salad": {
+        'tossed': {
+            'small': 5.40,
+            'medium': 7.50,
+            'large': 9.85,
+            'family': 30.00,
+            'super': 50.00,
+        },
+        'antipasto': {
+            'small': 5.95,
+            'medium': 9.85,
+            'large': 12.15,
+            'family': 45.00,
+            'super': 85.00,
+        },
+        'greek': {
+            'small': 5.95,
+            'medium': 9.85,
+            'large': 12.15,
+            'family': 45.00,
+            'super': 85.00,
+        },
+        'chicken': {
+            'small': 5.60,
+            'medium': 9.05,
+            'large': 12.50,
+            'family': 0,
+            'super': 0,
+        },
+        'add chicken':{
+            'small': 1.85,
+            'medium': 2.15,
+            'large': 2.35,
+            'family': 7.35,
+            'super': 7.35,
+        },
+        'extra meat': 1.5,
+        'extra cheese': 1.5,
+        'extra veggie': .75,
+    },
+
+
+
+    "sandwich": {
+        'burger': {
+            'deluxe': 11.10,
+            'only': 8.60,
+        },
+        'burger (double)': {
+            'deluxe': 15.75,
+            'only': 13.75,
+        },
+        'fish sandwich': {
+            'deluxe': 5.90,
+            'only': 5.10,
+        },
+        'bacon': 1.00,
+        'cheese': 0.90,
+    },
+
+
+
+    "seafood": {
+        'fish': {
+            'snack (2)': 9.75,
+            'dinner (4)': 13.25,
+            'family (10)': 27.0,
+            'extra': 2.85,
+        },
+        'lake perch': {
+            '6': 11.25,
+            'extra': 2.05,
+        },
+        '21 shrimp': {
+            '21': 11.85,
+        },
+        'hbs': {
+            '1/4 lb (9)': 11.65,
+            '1/2 lb (19)': 16.5,
+            '3/4 lb (29)': 21.25,
+            '1 lb (39)': 28.65,
+        },
+        'jumbo shrimp': {
+            'dinner (7)': 14.30,
+            'bucket (16)': 26.0,
+            'extra': 2.00,
+        },
+        'frog legs': {
+            '6': 12.7,
+            'extra': 3.60,
+        },
+    },
+
+
+
+    'sides': {
+        '4 oz slaw': .85,
+        'pint slaw': 2.25,
+        'french fries': 3.00,
+        'ff': 3.00,
+        'onion rings': 4.95,
+        'or': 4.95,
+        'spw': 4.55,
+        'df mushrooms': 5.05,
+        'dfm': 5.05,
+        'df sticks': 5.5,
+        'dfs': 5.5,
+        'roll': 0.35,
+        '6 stix': 2.95,
+        '12 stix': 4.5,
+        '6 stix (motz)': 4.85,
+        '12 stix (motz)': 8.05,
+        'meatball': 2.25,
+    },
+
+
+
+    'sauces': {
+        'ranch': 1.00,
+        'pint ranch': 4.75,
+        'pizza sauce': 0.55,
+        'pizza': 0.55,
+        'pint pizza': 3.50,
+        'garlic cheese dip': 1.6,
+        'gcd': 1.6,
+        'pint GCD': 6.5,
+        'BBQ': 0.1,
+        'pint BBQ': 4.5,
+        'tarter': 0, 
+        'hot sauce': 0,
+        'spag sauce': 1.50,
+        'pint spag': 4.50,
+        'quart spag': 7.75,
+        'V + O': 0.5,
+        'pint V + O': 3.5,
+        'quart V + O': 5.25,
+        'honey mustard': 0.5,
+        'blue cheese': 0.5,
+        'thousand island': 0.5,
+        'french': 0.5,
+        'greek': 0.5,
+        'cocktail': 0,
+        'mayo': 0,
+        'pepper flakes': 0,
+        "parm packet": 0,
+    },
+
+
+
+    'subs': {
+        'italian': {
+            'half': 5.70,
+            'whole': 10.00,
+        },
+        'deluxe': {
+            'half': 6.15,
+            'whole': 10.55,
+        },
+        'ham + cheese': {
+            'half': 5.65,
+            'whole': 10.00,
+        },
+        'veggie': {
+            'half': 5.65,
+            'whole': 10.00,
+        },
+        'turkey': {
+            'half': 5.70,
+            'whole': 10.00,
+        },
+        'steak + cheese': {
+            'half': null,
+            'whole': 12.55,
+        },
+        'steak + cheese + mushroom': {
+            'half': null,
+            'whole': 13.35,
+        },
+        'pizza': {
+            'half': 5.65,
+            'whole': 10.00,
+        },
+        'meatball': {
+            'half': 6.15,
+            'whole': 10.55,
+        },
+        'chicken tender': {
+            'half': 6.85,
+            'whole': 12.55,
+        },
+        'chicken parm': {
+            'half': 6.85,
+            'whole': 12.55,
+        },
+        'extra meat': 1.5,
+        'extra cheese': 1.5,
+        'extra sauce': 1,
+    },
+
+
+
+    'pasta': {
+        "spag": {
+            "pint": 7.65,
+            "quart": 12.35,
+            "bucket": 28.45,
+        },
+        "most": {
+            "pint": 7.65,
+            "quart": 12.35,
+            "bucket": 28.45,
+        },
+        "lasagna": {
+            "pint": 14.90,
+            "quart": 14.90,
+            "bucket": 14.90,
+        },
+        "chz rav": {
+            "pint": 8.70,
+            "quart": 13.50,
+            "bucket": 29.50,
+        },
+        "meat rav": {
+            "pint": 8.70,
+            "quart": 13.50,
+            "bucket": 29.50,
+        },
+        "meatball": {
+            'pint': 1.25,
+            'quart': 1.25,
+            'bucket': 5.35,
+        },
+        "baked cheese": {
+            'pint': 2.45,
+            'quart': 3.35,
+            'bucket': 5.75,
+        },
+        "mushrooms": {
+            'pint': .75,
+            'quart': 1.15,
+            'bucket': 2.40,
+        },
+        "tossed salad": {
+            'pint': 2.60,
+            'quart': 2.60,
+            'bucket': 2.60,
+        },
+    },
+
+
+    'fry': {
+        'main': {
+            'ribs':{
+                'sn': 11.05,
+                'le': 13.65,
+                'se': 15.05,
+                'slab': 27.70,
+            },
+            'tenders':{
+                '6': 12.55,
+                '12': 20.20,
+                '18': 26.50,
+                '24': 31.95,
+                'extra': 2.00,
+            },
+            'dings':{
+                '6': 7.45,
+                '12': 13.75,
+                '24': 24.00,
+                '36': 35.90,
+                'extra': 1.50,
+            },
+            'smorg':{
+                'smorg': 21.80,
+            },
+        },
+        'combination': {
+            'ckn': 7.55,
+            'rib': 6.15,
+            'fish': 7.55,
+            'fl': 8,
+            'shrimp': 7.65,
+            'tenders': 7.35,
+        },
+        'broasted': {
+            '2': 9.25,
+            '4': 12.60,
+            '8': 20.45,
+            '12': 27.70,
+            '16': 30.60,
+            '20': 34.60,
+            '24': 38.55,
+            '2breast': 12.05,
+            '4breast': 16.40,
+            '8breast': 26.60,
+            '12breast': 36.00,
+            '16breast': 39.80,
+            '20breast': 45.00,
+            '24breast': 50.15,
+            'breast': 4.15,
+            'thigh': 3.00,
+            'leg': 2.60,
+            'wing': 2.10,
+        }, 
+    },
+
+
+
+    'dessert': {
+        'oreo pie': 5.25,
+        'strawberry cheese': 5.25,
+        'cherry cheese': 5.25,
+        'chocolate chip': 2.0,
+        'oatmeal': 2.0,
+        'macadamia nut': 2.0,
+    },
+
+
+
+    'drinks': {
+        '12oz': 1.5,
+        '20oz': 2.5,
+        '1L': 3.5,
+        '2L': 4.5,
+        '750mL': 5.5,
+        '1.5L': 6.5,
+        '6pk': 7.5,
+        '12pk': 8.5,
+        'case': 9.5,
+    },
+
+
+};
+
+it's an old school pizza restaraunt called primo's pizza, and we can have
+a retro old school style, and keep everything super simple, and have everything
+configurable.
+
+here's more content on the menu:
+
+export let menu = [
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "small",
+    "Toppings": 0,
+    "price": 11.35
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "small",
+    "Toppings": 1,
+    "price": 12.7
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "small",
+    "Toppings": 2,
+    "price": 14.05
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "small",
+    "Toppings": 3,
+    "price": 15.4
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "small",
+    "Toppings": 4,
+    "price": 16.75
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "small",
+    "Toppings": 5,
+    "price": 18
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "small",
+    "Toppings": 9,
+    "price": 19.35
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "medium",
+    "Toppings": 0,
+    "price": 13.85
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "medium",
+    "Toppings": 1,
+    "price": 15.55
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "medium",
+    "Toppings": 2,
+    "price": 17.25
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "medium",
+    "Toppings": 3,
+    "price": 18.95
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "medium",
+    "Toppings": 4,
+    "price": 20.65
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "medium",
+    "Toppings": 5,
+    "price": 22.5
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "medium",
+    "Toppings": 9,
+    "price": 24.25
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "large",
+    "Toppings": 0,
+    "price": 17
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "large",
+    "Toppings": 1,
+    "price": 18.95
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "large",
+    "Toppings": 2,
+    "price": 20.9
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "large",
+    "Toppings": 3,
+    "price": 22.85
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "large",
+    "Toppings": 4,
+    "price": 24.8
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "large",
+    "Toppings": 5,
+    "price": 26.55
+  },
+  {
+    "Category": "pizza",
+    "Type": "round_square",
+    "Size": "large",
+    "Toppings": 9,
+    "price": 28.45
+  },
+  {
+    "Category": "pizza",
+    "Type": "round",
+    "Size": "xlarge",
+    "Toppings": 0,
+    "price": 20.85
+  },
+  {
+    "Category": "pizza",
+    "Type": "round",
+    "Size": "xlarge",
+    "Toppings": 1,
+    "price": 23.1
+  },
+  {
+    "Category": "pizza",
+    "Type": "round",
+    "Size": "xlarge",
+    "Toppings": 2,
+    "price": 25.35
+  },
+  {
+    "Category": "pizza",
+    "Type": "round",
+    "Size": "xlarge",
+    "Toppings": 3,
+    "price": 27.6
+  },
+  {
+    "Category": "pizza",
+    "Type": "round",
+    "Size": "xlarge",
+    "Toppings": 4,
+    "price": 29.85
+  },
+  {
+    "Category": "pizza",
+    "Type": "round",
+    "Size": "xlarge",
+    "Toppings": 5,
+    "price": 32.1
+  },
+  {
+    "Category": "pizza",
+    "Type": "round",
+    "Size": "xlarge",
+    "Toppings": 9,
+    "price": 34.35
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Small",
+    "Toppings": 0,
+    "price": 20.25
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Small",
+    "Toppings": 1,
+    "price": 22.7
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Small",
+    "Toppings": 2,
+    "price": 25.15
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Small",
+    "Toppings": 3,
+    "price": 27.6
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Small",
+    "Toppings": 4,
+    "price": 30.05
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Small",
+    "Toppings": 5,
+    "price": 32.5
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Small",
+    "Toppings": 9,
+    "price": 34.95
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Medium",
+    "Toppings": 0,
+    "price": 24.35
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Medium",
+    "Toppings": 1,
+    "price": 27.45
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Medium",
+    "Toppings": 2,
+    "price": 30.55
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Medium",
+    "Toppings": 3,
+    "price": 33.65
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Medium",
+    "Toppings": 4,
+    "price": 36.75
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Medium",
+    "Toppings": 5,
+    "price": 39.85
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Medium",
+    "Toppings": 9,
+    "price": 42.95
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Large",
+    "Toppings": 0,
+    "price": 29.1
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Large",
+    "Toppings": 1,
+    "price": 32.75
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Large",
+    "Toppings": 2,
+    "price": 36.4
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Large",
+    "Toppings": 3,
+    "price": 40.05
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Large",
+    "Toppings": 4,
+    "price": 43.7
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Large",
+    "Toppings": 5,
+    "price": 47.35
+  },
+  {
+    "Category": "pizza",
+    "Type": "twins",
+    "Size": "Large",
+    "Toppings": 9,
+    "price": 51
+  },
+  {
+    "Category": "pizza",
+    "Type": "stuffed",
+    "Size": null,
+    "Toppings": 0,
+    "price": 7.4
+  },
+  {
+    "Category": "pizza",
+    "Type": "stuffed",
+    "Size": null,
+    "Toppings": 1,
+    "price": 8.45
+  },
+  {
+    "Category": "pizza",
+    "Type": "stuffed",
+    "Size": null,
+    "Toppings": 2,
+    "price": 9.5
+  },
+  {
+    "Category": "pizza",
+    "Type": "stuffed",
+    "Size": null,
+    "Toppings": 3,
+    "price": 10.55
+  },
+  {
+    "Category": "pizza",
+    "Type": "stuffed",
+    "Size": null,
+    "Toppings": 4,
+    "price": 11.6
+  },
+  {
+    "Category": "pizza",
+    "Type": "stuffed",
+    "Size": null,
+    "Toppings": 5,
+    "price": 12.65
+  },
+  {
+    "Category": "pizza",
+    "Type": "stuffed",
+    "Size": null,
+    "Toppings": 9,
+    "price": 13.7
+  },
+  {
+    "Category": "pizza",
+    "Type": "tray",
+    "Size": null,
+    "Toppings": 0,
+    "price": 26
+  },
+  {
+    "Category": "pizza",
+    "Type": "tray",
+    "Size": null,
+    "Toppings": 1,
+    "price": 29.8
+  },
+  {
+    "Category": "pizza",
+    "Type": "tray",
+    "Size": null,
+    "Toppings": 2,
+    "price": 33.6
+  },
+  {
+    "Category": "pizza",
+    "Type": "tray",
+    "Size": null,
+    "Toppings": 3,
+    "price": 37.4
+  },
+  {
+    "Category": "pizza",
+    "Type": "tray",
+    "Size": null,
+    "Toppings": 4,
+    "price": 41.2
+  },
+  {
+    "Category": "pizza",
+    "Type": "tray",
+    "Size": null,
+    "Toppings": 5,
+    "price": 45.05
+  },
+  {
+    "Category": "pizza",
+    "Type": "tray",
+    "Size": null,
+    "Toppings": 9,
+    "price": 48.9
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "pint",
+    "Toppings": 0,
+    "price": 6.35
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "pint",
+    "Toppings": "mr",
+    "price": 7
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "pint",
+    "Toppings": "mb",
+    "price": 7.5
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "pint",
+    "Toppings": "mr_mb",
+    "price": 8.5
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "pint",
+    "Toppings": "baked",
+    "price": 8.3
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "pint",
+    "Toppings": "baked_mr",
+    "price": 8.95
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "pint",
+    "Toppings": "baked_mb",
+    "price": 9.45
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "pint",
+    "Toppings": "baked_mr_mb",
+    "price": 10.45
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "quart",
+    "Toppings": 0,
+    "price": 10.3
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "quart",
+    "Toppings": "mr",
+    "price": 11.35
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "quart",
+    "Toppings": "mb",
+    "price": 12
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "quart",
+    "Toppings": "mr_mb",
+    "price": 12.95
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "quart",
+    "Toppings": "baked",
+    "price": 12.65
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "quart",
+    "Toppings": "baked_mr",
+    "price": 13.7
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "quart",
+    "Toppings": "baked_mb",
+    "price": 14.35
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "quart",
+    "Toppings": "baked_mr_mb",
+    "price": 15.3
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "bucket",
+    "Toppings": 0,
+    "price": 23.7
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "bucket",
+    "Toppings": "mr",
+    "price": 25.6
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "bucket",
+    "Toppings": "mb",
+    "price": 27.2
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "bucket",
+    "Toppings": "mr_mb",
+    "price": 29.1
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "bucket",
+    "Toppings": "baked",
+    "price": 28.45
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "bucket",
+    "Toppings": "baked_mr",
+    "price": 30.35
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "bucket",
+    "Toppings": "baked_mb",
+    "price": 31.95
+  },
+  {
+    "Category": "pasta",
+    "Type": "spag_most",
+    "Size": "bucket",
+    "Toppings": "baked_mr_mb",
+    "price": 35
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "pint",
+    "Toppings": 0,
+    "price": 7.25
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "pint",
+    "Toppings": "mr",
+    "price": 7.75
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "pint",
+    "Toppings": "mb",
+    "price": 8.05
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "pint",
+    "Toppings": "mr_mb",
+    "price": 8.65
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "pint",
+    "Toppings": "baked",
+    "price": 9.2
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "pint",
+    "Toppings": "baked_mr",
+    "price": 9.7
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "pint",
+    "Toppings": "baked_mb",
+    "price": 10
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "pint",
+    "Toppings": "baked_mr_mb",
+    "price": 10.6
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "quart",
+    "Toppings": 0,
+    "price": 10.95
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "quart",
+    "Toppings": "mr",
+    "price": 11.75
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "quart",
+    "Toppings": "mb",
+    "price": 12.45
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "quart",
+    "Toppings": "mr_mb",
+    "price": 13.4
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "quart",
+    "Toppings": "baked",
+    "price": 13.3
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "quart",
+    "Toppings": "baked_mr",
+    "price": 14.1
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "quart",
+    "Toppings": "baked_mb",
+    "price": 14.8
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "quart",
+    "Toppings": "baked_mr_mb",
+    "price": 15.75
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "bucket",
+    "Toppings": 0,
+    "price": 24.7
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "bucket",
+    "Toppings": "mr",
+    "price": 26.6
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "bucket",
+    "Toppings": "mb",
+    "price": 28.2
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "bucket",
+    "Toppings": "mr_mb",
+    "price": 30.1
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "bucket",
+    "Toppings": "baked",
+    "price": 29.45
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "bucket",
+    "Toppings": "baked_mr",
+    "price": 31.35
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "bucket",
+    "Toppings": "baked_mb",
+    "price": 32.95
+  },
+  {
+    "Category": "pasta",
+    "Type": "ravioli",
+    "Size": "bucket",
+    "Toppings": "baked_mr_mb",
+    "price": 39
+  },
+  {
+    "Category": "seafood",
+    "Type": "hbs",
+    "Size": 9,
+    "Toppings": "only",
+    "price": 8.4
+  },
+  {
+    "Category": "seafood",
+    "Type": "hbs",
+    "Size": 9,
+    "Toppings": "dinner",
+    "price": 11.65
+  },
+  {
+    "Category": "seafood",
+    "Type": "hbs",
+    "Size": 19,
+    "Toppings": "only",
+    "price": 13.65
+  },
+  {
+    "Category": "seafood",
+    "Type": "hbs",
+    "Size": 19,
+    "Toppings": "dinner",
+    "price": 16.5
+  },
+  {
+    "Category": "seafood",
+    "Type": "hbs",
+    "Size": 29,
+    "Toppings": "only",
+    "price": 18.1
+  },
+  {
+    "Category": "seafood",
+    "Type": "hbs",
+    "Size": 29,
+    "Toppings": "dinner",
+    "price": 21.25
+  },
+  {
+    "Category": "seafood",
+    "Type": "hbs",
+    "Size": 39,
+    "Toppings": "only",
+    "price": 25.4
+  },
+  {
+    "Category": "seafood",
+    "Type": "hbs",
+    "Size": 39,
+    "Toppings": "dinner",
+    "price": 28.65
+  },
+  {
+    "Category": "seafood",
+    "Type": "fish",
+    "Size": 2,
+    "Toppings": "only",
+    "price": 7.75
+  },
+  {
+    "Category": "seafood",
+    "Type": "fish",
+    "Size": 2,
+    "Toppings": "dinner",
+    "price": 9.75
+  },
+  {
+    "Category": "seafood",
+    "Type": "fish",
+    "Size": 4,
+    "Toppings": "only",
+    "price": 11.25
+  },
+  {
+    "Category": "seafood",
+    "Type": "fish",
+    "Size": 4,
+    "Toppings": "dinner",
+    "price": 13.25
+  },
+  {
+    "Category": "seafood",
+    "Type": "fish",
+    "Size": 10,
+    "Toppings": "only",
+    "price": 25
+  },
+  {
+    "Category": "seafood",
+    "Type": "fish",
+    "Size": 10,
+    "Toppings": "dinner",
+    "price": 27
+  },
+  {
+    "Category": "seafood",
+    "Type": "fish",
+    "Size": 1,
+    "Toppings": "only",
+    "price": 2.85
+  },
+  {
+    "Category": "seafood",
+    "Type": "shrimp",
+    "Size": 7,
+    "Toppings": "only",
+    "price": 14.3
+  },
+  {
+    "Category": "seafood",
+    "Type": "shrimp",
+    "Size": 7,
+    "Toppings": "dinner",
+    "price": 16.3
+  },
+  {
+    "Category": "seafood",
+    "Type": "shrimp",
+    "Size": 16,
+    "Toppings": "only",
+    "price": 26
+  },
+  {
+    "Category": "seafood",
+    "Type": "shrimp",
+    "Size": 16,
+    "Toppings": "dinner",
+    "price": 28
+  },
+  {
+    "Category": "seafood",
+    "Type": "21shrimp",
+    "Size": null,
+    "Toppings": "only",
+    "price": 11.85
+  },
+  {
+    "Category": "seafood",
+    "Type": "perch",
+    "Size": 8,
+    "Toppings": "only",
+    "price": 9.25
+  },
+  {
+    "Category": "seafood",
+    "Type": "perch",
+    "Size": 8,
+    "Toppings": "dinner",
+    "price": 11.25
+  },
+  {
+    "Category": "seafood",
+    "Type": "perch",
+    "Size": 1,
+    "Toppings": "only",
+    "price": 2.05
+  },
+  {
+    "Category": "seafood",
+    "Type": "frogleg",
+    "Size": 6,
+    "Toppings": "only",
+    "price": 10.7
+  },
+  {
+    "Category": "seafood",
+    "Type": "frogleg",
+    "Size": 6,
+    "Toppings": "dinner",
+    "price": 12.7
+  },
+  {
+    "Category": "seafood",
+    "Type": "frogleg",
+    "Size": 2,
+    "Toppings": "only",
+    "price": 3.6
+  },
+  {
+    "Category": "burger_sandwich",
+    "Type": "charburger",
+    "Size": "single",
+    "Toppings": "only",
+    "price": 7.15
+  },
+  {
+    "Category": "burger_sandwich",
+    "Type": "charburger",
+    "Size": "single",
+    "Toppings": "deluxe",
+    "price": 9.25
+  },
+  {
+    "Category": "burger_sandwich",
+    "Type": "charburger",
+    "Size": "double",
+    "Toppings": "only",
+    "price": 9.5
+  },
+  {
+    "Category": "burger_sandwich",
+    "Type": "charburger",
+    "Size": "double",
+    "Toppings": "deluxe",
+    "price": 11.6
+  },
+  {
+    "Category": "burger_sandwich",
+    "Type": "fish",
+    "Size": null,
+    "Toppings": "only",
+    "price": 5.1
+  },
+  {
+    "Category": "burger_sandwich",
+    "Type": "fish",
+    "Size": null,
+    "Toppings": "deluxe",
+    "price": 6.9
+  },
+  {
+    "Category": "burger_sandwich",
+    "Type": "add_cheese",
+    "Size": null,
+    "Toppings": null,
+    "price": 0.8
+  },
+  {
+    "Category": "burger_sandwich",
+    "Type": "add_bacon",
+    "Size": null,
+    "Toppings": null,
+    "price": 1
+  },
+  {
+    "Category": "salads",
+    "Type": "tossed",
+    "Size": "small",
+    "Toppings": null,
+    "price": 3.4
+  },
+  {
+    "Category": "salads",
+    "Type": "tossed",
+    "Size": "medium",
+    "Toppings": null,
+    "price": 5.6
+  },
+  {
+    "Category": "salads",
+    "Type": "tossed",
+    "Size": "large",
+    "Toppings": null,
+    "price": 7.95
+  },
+  {
+    "Category": "salads",
+    "Type": "antipasto",
+    "Size": "small",
+    "Toppings": null,
+    "price": 4.05
+  },
+  {
+    "Category": "salads",
+    "Type": "antipasto",
+    "Size": "medium",
+    "Toppings": null,
+    "price": 7.95
+  },
+  {
+    "Category": "salads",
+    "Type": "antipasto",
+    "Size": "large",
+    "Toppings": null,
+    "price": 10.75
+  },
+  {
+    "Category": "salads",
+    "Type": "greek",
+    "Size": "small",
+    "Toppings": null,
+    "price": 4.05
+  },
+  {
+    "Category": "salads",
+    "Type": "greek",
+    "Size": "medium",
+    "Toppings": null,
+    "price": 7.95
+  },
+  {
+    "Category": "salads",
+    "Type": "greek",
+    "Size": "large",
+    "Toppings": null,
+    "price": 10.75
+  },
+  {
+    "Category": "salads",
+    "Type": "chicken",
+    "Size": "small",
+    "Toppings": null,
+    "price": 5.6
+  },
+  {
+    "Category": "salads",
+    "Type": "chicken",
+    "Size": "medium",
+    "Toppings": null,
+    "price": 9.05
+  },
+  {
+    "Category": "salads",
+    "Type": "chicken",
+    "Size": "large",
+    "Toppings": null,
+    "price": 12.5
+  },
+  {
+    "Category": "salads",
+    "Type": "add_chicken",
+    "Size": null,
+    "Toppings": null,
+    "price": 1.85
+  },
+  {
+    "Category": "salads",
+    "Type": "xmeat",
+    "Size": null,
+    "Toppings": null,
+    "price": 1.5
+  },
+  {
+    "Category": "salads",
+    "Type": "xdressing",
+    "Size": null,
+    "Toppings": null,
+    "price": 0.5
+  },
+  {
+    "Category": "salads",
+    "Type": "xranch",
+    "Size": null,
+    "Toppings": null,
+    "price": 1
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 2,
+    "Toppings": "only",
+    "price": 8.25
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 4,
+    "Toppings": "only",
+    "price": 11.6
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 8,
+    "Toppings": "only",
+    "price": 18.45
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 12,
+    "Toppings": "only",
+    "price": 25.7
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 16,
+    "Toppings": "only",
+    "price": 28.6
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 20,
+    "Toppings": "only",
+    "price": 32.6
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 24,
+    "Toppings": "only",
+    "price": 36.55
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 2,
+    "Toppings": "dinner",
+    "price": 12.05
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 4,
+    "Toppings": "dinner",
+    "price": 16.4
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 8,
+    "Toppings": "dinner",
+    "price": 26.6
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 12,
+    "Toppings": "dinner",
+    "price": 36
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 16,
+    "Toppings": "dinner",
+    "price": 39.8
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 20,
+    "Toppings": "dinner",
+    "price": 45
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": 24,
+    "Toppings": "dinner",
+    "price": 50.15
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "2breast",
+    "Toppings": "only",
+    "price": 11.05
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "4breast",
+    "Toppings": "only",
+    "price": 15.4
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "8breast",
+    "Toppings": "only",
+    "price": 23.6
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "12breast",
+    "Toppings": "only",
+    "price": 36
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "16breast",
+    "Toppings": "only",
+    "price": 37.8
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "20breast",
+    "Toppings": "only",
+    "price": 43
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "24breast",
+    "Toppings": "only",
+    "price": 48.15
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "2breast",
+    "Toppings": "dinner",
+    "price": 12.05
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "4breast",
+    "Toppings": "dinner",
+    "price": 16.4
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "8breast",
+    "Toppings": "dinner",
+    "price": 26.6
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "12breast",
+    "Toppings": "dinner",
+    "price": 36
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "16breast",
+    "Toppings": "dinner",
+    "price": 39.8
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "20breast",
+    "Toppings": "dinner",
+    "price": 45
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "24breast",
+    "Toppings": "dinner",
+    "price": 50.15
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "breast",
+    "Toppings": null,
+    "price": 4.15
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "thigh",
+    "Toppings": null,
+    "price": 3
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "leg",
+    "Toppings": null,
+    "price": 2.6
+  },
+  {
+    "Category": "fry",
+    "Type": "broasted",
+    "Size": "wing",
+    "Toppings": null,
+    "price": 2.1
+  },
+  {
+    "Category": "fry",
+    "Type": "ribs",
+    "Size": "slab",
+    "Toppings": "only",
+    "price": 25.7
+  },
+  {
+    "Category": "fry",
+    "Type": "ribs",
+    "Size": "se",
+    "Toppings": "only",
+    "price": 14.05
+  },
+  {
+    "Category": "fry",
+    "Type": "ribs",
+    "Size": "le",
+    "Toppings": "only",
+    "price": 12.65
+  },
+  {
+    "Category": "fry",
+    "Type": "ribs",
+    "Size": "sn",
+    "Toppings": "only",
+    "price": 10.05
+  },
+  {
+    "Category": "fry",
+    "Type": "ribs",
+    "Size": "slab",
+    "Toppings": "dinner",
+    "price": 27.7
+  },
+  {
+    "Category": "fry",
+    "Type": "ribs",
+    "Size": "se",
+    "Toppings": "dinner",
+    "price": 15.05
+  },
+  {
+    "Category": "fry",
+    "Type": "ribs",
+    "Size": "le",
+    "Toppings": "dinner",
+    "price": 13.65
+  },
+  {
+    "Category": "fry",
+    "Type": "ribs",
+    "Size": "sn",
+    "Toppings": "dinner",
+    "price": 11.05
+  },
+  {
+    "Category": "fry",
+    "Type": "tenders",
+    "Size": 6,
+    "Toppings": "only",
+    "price": 9.40
+  },
+  {
+    "Category": "fry",
+    "Type": "tenders",
+    "Size": 12,
+    "Toppings": "only",
+    "price": 17.05
+  },
+  {
+    "Category": "fry",
+    "Type": "tenders",
+    "Size": 18,
+    "Toppings": "only",
+    "price": 23.35
+  },
+  {
+    "Category": "fry",
+    "Type": "tenders",
+    "Size": 24,
+    "Toppings": "only",
+    "price": 28.80
+  },
+  {
+    "Category": "fry",
+    "Type": "tenders",
+    "Size": 1,
+    "Toppings": "only",
+    "price": 1.9
+  },
+  {
+    "Category": "fry",
+    "Type": "tenders",
+    "Size": 6,
+    "Toppings": "dinner",
+    "price": 12.55
+  },
+  {
+    "Category": "fry",
+    "Type": "tenders",
+    "Size": 12,
+    "Toppings": "dinner",
+    "price": 20.20
+  },
+  {
+    "Category": "fry",
+    "Type": "tenders",
+    "Size": 18,
+    "Toppings": "dinner",
+    "price": 26.50
+  },
+  {
+    "Category": "fry",
+    "Type": "tenders",
+    "Size": 24,
+    "Toppings": "dinner",
+    "price": 31.95
+  },
+  {
+    "Category": "fry",
+    "Type": "dings",
+    "Size": 6,
+    "Toppings": "only",
+    "price": 6.45
+  },
+  {
+    "Category": "fry",
+    "Type": "dings",
+    "Size": 12,
+    "Toppings": "only",
+    "price": 12.75
+  },
+  {
+    "Category": "fry",
+    "Type": "dings",
+    "Size": 24,
+    "Toppings": "only",
+    "price": 23
+  },
+  {
+    "Category": "fry",
+    "Type": "dings",
+    "Size": 36,
+    "Toppings": "only",
+    "price": 34.9
+  },
+  {
+    "Category": "fry",
+    "Type": "dings",
+    "Size": 1,
+    "Toppings": "only",
+    "price": 1.5
+  },
+  {
+    "Category": "fry",
+    "Type": "dings",
+    "Size": 6,
+    "Toppings": "dinner",
+    "price": 7.45
+  },
+  {
+    "Category": "fry",
+    "Type": "dings",
+    "Size": 12,
+    "Toppings": "dinner",
+    "price": 13.75
+  },
+  {
+    "Category": "fry",
+    "Type": "dings",
+    "Size": 24,
+    "Toppings": "dinner",
+    "price": 24
+  },
+  {
+    "Category": "fry",
+    "Type": "dings",
+    "Size": 36,
+    "Toppings": "dinner",
+    "price": 35.9
+  },
+  {
+    "Category": "fry",
+    "Type": "combination",
+    "Size": "smorg",
+    "Toppings": null,
+    "price": 20.8
+  },
+  {
+    "Category": "fry",
+    "Type": "combination",
+    "Size": "chicken",
+    "Toppings": null,
+    "price": ""
+  },
+  {
+    "Category": "fry",
+    "Type": "combination",
+    "Size": "shrimp",
+    "Toppings": null,
+    "price": ""
+  },
+  {
+    "Category": "fry",
+    "Type": "combination",
+    "Size": "rib",
+    "Toppings": null,
+    "price": ""
+  },
+  {
+    "Category": "fry",
+    "Type": "combination",
+    "Size": "fl",
+    "Toppings": null,
+    "price": ""
+  },
+  {
+    "Category": "fry",
+    "Type": "combination",
+    "Size": "fish",
+    "Toppings": null,
+    "price": ""
+  },
+  {
+    "Category": "fry",
+    "Type": "combination",
+    "Size": "addDinner",
+    "Toppings": "dinner",
+    "price": 1
+  },
+  {
+    "Category": "subs",
+    "Type": "italian",
+    "Size": "half",
+    "Toppings": null,
+    "price": 5.7
+  },
+  {
+    "Category": "subs",
+    "Type": "italian",
+    "Size": "whole",
+    "Toppings": null,
+    "price": 8.35
+  },
+  {
+    "Category": "subs",
+    "Type": "ham_cheese",
+    "Size": "half",
+    "Toppings": null,
+    "price": 5.65
+  },
+  {
+    "Category": "subs",
+    "Type": "ham_cheese",
+    "Size": "whole",
+    "Toppings": null,
+    "price": 8.3
+  },
+  {
+    "Category": "subs",
+    "Type": "pizza",
+    "Size": "half",
+    "Toppings": null,
+    "price": 5.65
+  },
+  {
+    "Category": "subs",
+    "Type": "pizza",
+    "Size": "whole",
+    "Toppings": null,
+    "price": 8.3
+  },
+  {
+    "Category": "subs",
+    "Type": "vegetarian",
+    "Size": "half",
+    "Toppings": null,
+    "price": 5.65
+  },
+  {
+    "Category": "subs",
+    "Type": "vegetarian",
+    "Size": "whole",
+    "Toppings": null,
+    "price": 8.3
+  },
+  {
+    "Category": "subs",
+    "Type": "meatball",
+    "Size": "half",
+    "Toppings": null,
+    "price": 6.15
+  },
+  {
+    "Category": "subs",
+    "Type": "meatball",
+    "Size": "whole",
+    "Toppings": null,
+    "price": 8.8
+  },
+  {
+    "Category": "subs",
+    "Type": "turkey",
+    "Size": "half",
+    "Toppings": null,
+    "price": 5.7
+  },
+  {
+    "Category": "subs",
+    "Type": "turkey",
+    "Size": "whole",
+    "Toppings": null,
+    "price": 8.35
+  },
+  {
+    "Category": "subs",
+    "Type": "deluxe",
+    "Size": "half",
+    "Toppings": null,
+    "price": 6.15
+  },
+  {
+    "Category": "subs",
+    "Type": "deluxe",
+    "Size": "whole",
+    "Toppings": null,
+    "price": 8.8
+  },
+  {
+    "Category": "subs",
+    "Type": "steak_cheese",
+    "Size": "whole",
+    "Toppings": null,
+    "price": 10.45
+  },
+  {
+    "Category": "subs",
+    "Type": "steak_cheese_mr",
+    "Size": "whole",
+    "Toppings": null,
+    "price": 11.1
+  },
+  {
+    "Category": "subs",
+    "Type": "chicken_parm",
+    "Size": "half",
+    "Toppings": null,
+    "price": 6.85
+  },
+  {
+    "Category": "subs",
+    "Type": "chicken_parm",
+    "Size": "whole",
+    "Toppings": null,
+    "price": 9.8
+  },
+  {
+    "Category": "subs",
+    "Type": "chicken_tender",
+    "Size": "half",
+    "Toppings": null,
+    "price": 6.85
+  },
+  {
+    "Category": "subs",
+    "Type": "chicken_tender",
+    "Size": "whole",
+    "Toppings": null,
+    "price": 9.8
+  },
+  {
+    "Category": "subs",
+    "Type": "xsteak",
+    "Size": null,
+    "Toppings": null,
+    "price": 5.5
+  },
+  {
+    "Category": "subs",
+    "Type": "xmeat",
+    "Size": null,
+    "Toppings": null,
+    "price": 1.5
+  },
+  {
+    "Category": "subs",
+    "Type": "xcheese",
+    "Size": null,
+    "Toppings": null,
+    "price": 1.5
+  },
+  {
+    "Category": "sides",
+    "Type": "slice",
+    "Size": null,
+    "Toppings": null,
+    "price": 3.75
+  },
+  {
+    "Category": "sides",
+    "Type": "slaw",
+    "Size": "cup",
+    "Toppings": null,
+    "price": 0.85
+  },
+  {
+    "Category": "sides",
+    "Type": "slaw",
+    "Size": "pint",
+    "Toppings": null,
+    "price": 2.25
+  },
+  {
+    "Category": "sides",
+    "Type": "Onion rings",
+    "Size": null,
+    "Toppings": null,
+    "price": 4.95
+  },
+  {
+    "Category": "sides",
+    "Type": "French fries",
+    "Size": null,
+    "Toppings": null,
+    "price": 3.0
+  },
+  {
+    "Category": "sides",
+    "Type": "Deep fried mushrooms",
+    "Size": null,
+    "Toppings": null,
+    "price": 5.05
+  },
+  {
+    "Category": "sides",
+    "Type": "Deep fries cheese sticks",
+    "Size": null,
+    "Toppings": null,
+    "price": 5.5
+  },
+  {
+    "Category": "sides",
+    "Type": "Spicy potato wedges",
+    "Size": null,
+    "Toppings": null,
+    "price": 4.55
+  },
+  {
+    "Category": "sides",
+    "Type": "Extra roll",
+    "Size": null,
+    "Toppings": null,
+    "price": 0.35
+  },
+  {
+    "Category": "sauce",
+    "Type": "ranch",
+    "Size": "pint",
+    "Toppings": null,
+    "price": 4.75
+  },
+  {
+    "Category": "sauce",
+    "Type": "ranch",
+    "Size": "cup",
+    "Toppings": null,
+    "price": 1
+  },
+  {
+    "Category": "sauce",
+    "Type": "pizza",
+    "Size": "cup",
+    "Toppings": null,
+    "price": 0.55
+  },
+  {
+    "Category": "sauce",
+    "Type": "gcd",
+    "Size": "cup",
+    "Toppings": null,
+    "price": 1.6
+  },
+  {
+    "Category": "sauce",
+    "Type": "greek",
+    "Size": "cup",
+    "Toppings": null,
+    "price": 0.5
+  },
+  {
+    "Category": "sauce",
+    "Type": "v_o",
+    "Size": "cup",
+    "Toppings": null,
+    "price": 0.5
+  },
+  {
+    "Category": "sauce",
+    "Type": "hm",
+    "Size": "cup",
+    "Toppings": null,
+    "price": 0.5
+  },
+  {
+    "Category": "sauce",
+    "Type": "bc",
+    "Size": "cup",
+    "Toppings": null,
+    "price": 0.5
+  },
+  {
+    "Category": "sauce",
+    "Type": "thousand",
+    "Size": "cup",
+    "Toppings": null,
+    "price": 0.5
+  },
+  {
+    "Category": "sauce",
+    "Type": "french",
+    "Size": "cup",
+    "Toppings": null,
+    "price": 0.5
+  },
+  {
+    "Category": "sauce",
+    "Type": "spag",
+    "Size": "pint",
+    "Toppings": null,
+    "price": 3.55
+  },
+  {
+    "Category": "sauce",
+    "Type": "spag",
+    "Size": "cup",
+    "Toppings": null,
+    "price": 1.5
+  },
+  {
+    "Category": "sauce",
+    "Type": "bbq",
+    "Size": "pint",
+    "Toppings": null,
+    "price": 3.5
+  },
+  {
+    "Category": "sauce",
+    "Type": "pizza",
+    "Size": "pint",
+    "Toppings": null,
+    "price": 2.5
+  },
+  {
+    "Category": "sauce",
+    "Type": "gcd",
+    "Size": "pint",
+    "Toppings": null,
+    "price": 6.5
+  },
+  {
+    "Category": "sauce",
+    "Type": "v_o",
+    "Size": "pint",
+    "Toppings": null,
+    "price": 3.5
+  },
+  {
+    "Category": "desserts",
+    "Type": "oreo",
+    "Size": null,
+    "Toppings": null,
+    "price": 5.25
+  },
+  {
+    "Category": "desserts",
+    "Type": "straw",
+    "Size": null,
+    "Toppings": null,
+    "price": 5.25
+  },
+  {
+    "Category": "desserts",
+    "Type": "cherry",
+    "Size": null,
+    "Toppings": null,
+    "price": 5.25
+  },
+  {
+    "Category": "desserts",
+    "Type": "choc",
+    "Size": null,
+    "Toppings": null,
+    "price": 2
+  },
+  {
+    "Category": "desserts",
+    "Type": "oat",
+    "Size": null,
+    "Toppings": null,
+    "price": 2
+  },
+  {
+    "Category": "desserts",
+    "Type": "mac",
+    "Size": null,
+    "Toppings": null,
+    "price": 2
+  }
+]
+
+SaladsAntipasto: Genoa salami, hard salami, ham, provolone cheese, black olives, green olives,
+cucumber, tomatoes, red onion, pepperocini
+Small- 1 dressing medium- 2 dressings large- 3 dressings. Vinegar and oil
+Greek: Feta cheese, chick peas, beets, Greek olives, red onion, cucumber, tomatoes,
+pepperocini
+Greek dressing 1-small 2-medium 3-large
+Toss: black olives, green olives, cucumber, tomatoes, red onion, pepperocini
+Vinegar and oil dressing 1-small 2-medium 3-large
+Grilled Chicken: grilled chicken, provolone cheese, red onion, cucumber, tomatoes
+Vinegar and oil dressing 1-small 2-medium 3-large
+Extra vinegar and oil dressing $0.50
+Add ranch to any salad 1-small 2-medium 3-large after that $1.00 per ranch
+Honey mustard dressing max of 3 after that $0.50
+French dressing max of 3 after that $0.50
+Thousand island dressing max of 3 after that $0.50
+Blue cheese dressing max of 4 after that $0.50
+Creamy Italian 1-small 2-medium 3- large after that $0.50
+Add chicken to saladSmall- $1.85
+Medium- $2.15
+Large- $2.35
+Add extra salami or ham to salad $1.50
+Add turkey to any salad $1.50
+Extra cheese to any salad $1.50
+Add extra grilled chicken same price as adding chicken to salad depending on size
+SubsItalian- 2 ham, 3 hard salami, 3 genoa salami, 3 provolone cheese, bake then add creamy
+Italian dressing, lettuce, 4 tomatoes, and Red onion
+Deluxe- 2 ham, 3 hard salami, 3 genoa salami, 2 turkey, 3 provolone cheese, bake then add
+creamy Italian dressing, lettuce, 4 tomatoes, and Red onion
+Ham and cheese- 6 ham, 3 provolone cheese, bake then add creamy Italian dressing, lettuce,
+4 tomatoes, and Red onion
+Vegetarian- black olives, mushroom, onion, green Peper, 3 provolone cheese, bake then add
+creamy Italian dressing, lettuce, 4 tomatoes, and Red onion
+Turkey- 6 turkey, 3 Swiss cheese, bake then add creamy Italian dressing, lettuce, 4 tomatoes,
+and Red onion
+Steak and cheese- 6oz steak packet, 3 provolone cheese, bake then add creamy Italian
+dressing, lettuce, 4 tomatoes, and Red onion
+Steak and cheese with mushroom- 6oz steak packet, add mushroom, 3 provolone cheese,
+bake then add creamy Italian dressing, lettuce, 4 tomatoes, and Red onion
+Pizza- pepperoni, ham, onion, 3 provolone cheese, bake
+Meatball- 3 meatballs, meat sauce, bake
+Chicken tender- 4 chicken tenders, 3 provolone cheese, bake then add creamy Italian dressing,
+lettuce, 4 tomatoes, and Red onion
+Chicken Parmesan- 4 chicken tenders, marinara sauce, 3 provolone cheese, bake
+Add extra hard salami, extra genoa salami, ham, turkey, provolone cheese, or Swiss cheese to
+sub add $1.50 adds 2 pieces of each meat and cheese
+Add extra tender- $1.90 per piece
+Extra creamy Italian $0.50
+Extra steak to sub- $5.50
+Adding items to pizza sub $1.50
+Fry combination platesRib and chicken- $
+Rib and fish- $
+Rib and shrimp- $
+Rib and chicken tenders- $
+Chicken and fish- $
+Chicken and shrimp- $
+Shrimp and fish- $
+Shrimp and frog legs- $
+Smorgasbord- $
+Sauces for dinnersWing dings and tenders 6 pieces- 2 bbq
+Wing dings and tenders 12 pieces- 4 bbq
+tenders 18 pieces- 6 bbq
+Wing dings and tenders 24 pieces- 8 bbq
+If they get no bbq and want ranch they get 1 for 6, 2 for 12, 3 for 18 and 24, 4 for 36
+Extra bbq sauce after what they are given $0.25 for each bbq 
+
+and the schema
+
+// Import required modules
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const { TopologyDescription } = require('mongodb');
+const { CreditCardData, Address, ServicesConfigs, ServicesContainer } = require('globalpayments-api');
+
+// import { ServicesConfig, ServicesContainer } from "globalpayments-api";
+
+
+
+// TODO: 
+//  - handling for day/time ranges
+//  - middleware auth
+
+// Create Express app and configure middleware
+const corsOptions ={
+  origin: '*',
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200,
+  preflightContinue: true,
+}
+
+
+//fix for cors preflight
+// app.options('*', cors(corsOptions));
+
+
+
+const app = express();
+app.use(express.json(), cors(corsOptions));
+// app.use(express.json());
+
+// Connect to MongoDB database using Mongoose
+mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+app.options('*', cors(corsOptions));
+app.all('*', cors(corsOptions), function(req, res, next) {
+  // res.header("Access-Control-Allow-Origin", "*");
+
+  if(req.method === 'OPTIONS'){
+    // console.log('asdfasdfasdf');
+    console.log('preflight', req.headers);
+    // res.sendStatus(200);
+  }
+
+  next();
+});
+
+const orderSchema = new mongoose.Schema({
+  type: String,
+  items: [mongoose.Schema.Types.Mixed],
+  customer: mongoose.Schema.Types.Mixed,
+  employee: mongoose.Schema.Types.Mixed,
+  time: { type: String, default: Date.now },
+  date: String,
+  checkedOut: Boolean,
+  delivered: { type: Boolean, default: false },
+  payment: mongoose.Schema.Types.Mixed,
+  price: Number,
+  note: String,
+  paid: { type: Boolean, default: false },
+  customerID: String,
+  orderNumber: Number,
+  edited: { type: Boolean, default: false },
+});
+//todo: add customer id
+const Order = mongoose.model('Order', orderSchema);
+const OrderHistory = mongoose.model('OrderHistory', orderSchema);
+
+// get all orders from history
+app.get('/orders/history', cors(corsOptions), async (req, res) => {
+  try{
+    const orders = await OrderHistory.find({});
+    res.send(orders);
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'order get failed' });
+  }
+});
+
+// post order to history
+app.post('/orders/history', cors(corsOptions), async (req, res) => {
+  try{
+    const order = new OrderHistory(req.body);
+    const filter = { _id: order._id };
+    const update = order;
+    const options = {upsert: true, new: true, setDefaultsOnInsert: true};
+    let doc = await OrderHistory.findOneAndUpdate(filter, update, options);
+    console.log(doc);
+    // await order.save();
+    res.send(doc);
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'order post failed' });
+  }
+});
+
+// get all orders
+app.get('/orders', cors(corsOptions), async (req, res) => {
+  try{
+    const orders = await Order.find({});
+    // console.log(orders);
+    console.log('request', req.headers);
+
+    res.send(orders);
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'order get failed' });
+  }
+});
+
+
+// post order
+app.post('/orders', cors(corsOptions), async (req, res) => {
+  try{
+    const order = new Order(req.body);
+    console.log(order);
+    await order.save();
+    res.send(order);
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'order post failed' });
+  }
+});
+
+// get orders by customer id
+app.put('/orders/cust/:id', cors(corsOptions), async (req, res) => {
+  const filter = { customerID: req.body._id };
+  try{
+    const order = await Order.find(filter);
+    res.send(order);
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'order get failed' });
+  }
+});
+
+// get order by order id
+app.get('/orders/:id', cors(corsOptions), async (req, res) => {
+  try{
+    const order = await Order.findById(req.body._id);
+    res.send(order);
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'order get failed' });
+  }
+});
+
+// update order by id
+app.put('/orders/:id', cors(corsOptions), async (req, res) => {
+  console.log('server order', req.body);
+  try{
+    const order = await Order.findByIdAndUpdate(req.body._id, req.body, { new: true });
+    res.send(order);
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'order update failed' });
+  }
+});
+
+// delete order by id
+app.delete('/orders/:id', cors(corsOptions), async (req, res) => {
+  try{
+    await Order.findByIdAndDelete(req.params.id);
+    res.send({message: 'order deleted successfully', id: req.params.id});
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'order deleted failed' });
+  }
+});
+
+// const History = mongoose.model('History', orderSchema);
+
+// // get all orders from history
+// app.get('/history', async (req, res) => {
+//   const orders = await History.find({});
+//   res.send(orders);
+// });
+
+// // post order to history
+// app.post('/history', async (req, res) => {
+//   const order = new History(req.body);
+//   await order.save();
+//   res.send(order);
+// });
+
+// // get orders by customer id from history
+// app.put('/history/cust/:id', async (req, res) => {
+//   const filter = { customerID: req.body._id };
+//   const order = await History.find(filter);
+//   res.send(order);
+// });
+
+// // get order by order id from history
+// app.get('/history/:id', async (req, res) => {
+//   const filter = { _id: req.body._id };
+//   const order = await History.find(filter);
+//   res.send(order);
+// });
+
+
+// customer schema
+const customerSchema = new mongoose.Schema({
+    first: {type: String, required: true},
+    last: String,
+    phone: {type: String, required: true},
+    address: String,
+    credit: mongoose.Schema.Types.Mixed,
+    notes: [mongoose.Schema.Types.Mixed], 
+});
+const Customer = mongoose.model('Customer', customerSchema);
+
+// get all customers
+app.get('/customers', cors(corsOptions), async (req, res) => {
+  try{
+    const customers = await Customer.find({});
+    res.send(customers);
+  }catch(err){
+    console.log(err);
+    res.send({ message: 'customer get failed' });
+  }
+});
+
+// search customers
+// app.put('/customers/:search', async (req, res) => {
+//   const filter = {};
+//   //regex for partial string match
+//   Object.keys(req.body).forEach(k => {
+//     // console.log(req.body[k]);
+//     filter[k] = { "$regex": req.body[k], "$options": "i" };
+//   });
+//   const cust = await Customer.find(filter);
+//   console.log('asdf');
+//   // console.log(cust);
+//   res.send(cust);
+// });
+
+//probs dont need this
+// find customer by phone 
+// app.put('/customers/:phone', async (req, res) => {
+//   const cust = await Customer.findOne({ phone: req.body.phone });
+//   res.send(cust);
+// });
+
+// delete customer by id
+app.delete('/customers/:id', cors(corsOptions), async (req, res) => {
+  try{
+    const doc = await Customer.findByIdAndDelete(req.body._id);
+    //fix this weird list thing
+    // console.log(doc, req.body[0]._id);
+    res.send({ customer: doc, message: 'customer deleted success' });
+  }catch(err){
+    console.log(err);
+    res.send({ message: 'customer deleted failed' });
+  }
+});
+
+// get customer by id
+app.put('/customers/:id', cors(corsOptions), async (req, res) => {
+  console.log('req.body', req.body);
+  // const cust = await Customer.findById(req.body);
+  // console.log('asdfasdfasdf');
+  // console.log('result', cust);
+  // res.set({
+  //   "Content-Type": "application/json",
+  //   "Access-Control-Allow-Origin": "*",
+  // });
+  // res.send(cust);
+});
+
+
+
+
+// why do we have post and put
+// add/update customer
+app.post('/customers', cors(corsOptions), async (req, res) => {
+  let cust = req.body;
+  if('_id' in cust){
+    delete cust._id;
+  }
+  const filter = { phone: req.body.phone };
+  const update = { ...cust };
+  const options = {upsert: true, new: true, setDefaultsOnInsert: true};
+  try{
+    let doc = await Customer.findOneAndUpdate(filter, update, options);
+    // const cust = await Customer.findOne(filter);
+    res.send(doc);
+  }catch(err){
+    console.log(err);
+    res.send({ message: 'customer update failed' });
+  }
+});
+
+// add/update customer
+app.put('/customers', cors(corsOptions), async (req, res) => {
+  let cust = req.body;
+  if(_id in cust){
+    delete cust._id;
+  }
+  const filter = { phone: req.body.phone };
+  const update = { ...cust };
+  const options = {upsert: true, new: true, setDefaultsOnInsert: true};
+  try{
+    let doc = await Customer.findOneAndUpdate(filter, update, options);
+    // const cust = await Customer.findOne(filter);
+    res.send(doc);
+  }catch(err){
+    console.log(err);
+    res.send({ message: 'customer update failed' });
+  }
+});
+
+app.get('/', cors(corsOptions), function(req, res) {
+  try{
+    const ipAddress = req.socket.remoteAddress;
+    res.send(ipAddress);
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'ip get failed' })
+  }
+});
+
+
+
+//payments --------------------
+
+
+// Configure heartland API
+const config = new ServicesConfigs();
+config.secretApiKey = "skapi_cert_MTyMAQBiHVEAewvIzXVFcmUd2UcyBge_eCpaASUp0A";
+config.developerId = "000000";
+config.versionNumber = "0000";
+config.serviceUrl = "https://cert.api2.heartlandportico.com";
+ServicesContainer.configure(config);
+
+
+app.put('/payments/verify', cors(corsOptions), async (req, res) => {
+  console.log('payment', req.body);
+  const card = new CreditCardData();
+  card.token = req.body.token;
+  const address = new Address();
+  address.code = '48152';
+  try{
+    const response = await card.verify()
+      .withCurrency("USD")
+      .withAddress(address)
+      .withRequestMultiUseToken(true)
+      // .execute();
+    console.log('success', response);
+    const resp = JSON.parse(JSON.stringify(response.paymentMethod));
+    res.send({ message: 'verify success', response: resp });
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'payment failed', error: error });
+  }
+});
+
+app.put('/payments/charge', cors(corsOptions), async (req, res) => {
+  console.log('payment', req.body);
+  const amount = req.body.amount;
+  const card = new CreditCardData();
+  card.token = req.body.token;
+  const address = new Address();
+  address.code = '48152';
+  try{
+    const response = await card.charge(amount)
+      .withCurrency("USD")
+      .withAddress(address)
+      .withRequestMultiUseToken(true)
+      // .execute();
+    console.log('success', response);
+    const resp = JSON.parse(JSON.stringify(response.paymentMethod));
+    let id = resp.clientTransactionId || null;
+    // console.log('respID', resp.clientTransactionId);
+    res.send({ message: 'payment success', response: resp, transactionID: id });
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'payment failed', error: error });
+  }
+});
+
+app.put('/payments/tip', cors(corsOptions), async (req, res) => {
+  console.log('payment', req.body);
+  const amount = req.body.amount;
+  const transaction_id = req.body.transactionId;
+  try{
+    const response = await Transaction.fromId(transaction_id)
+      .edit()
+      // .withAmount(15.00)
+      .withGratuity(amount)
+      // .execute();
+    console.log('success', response);
+    const resp = JSON.parse(JSON.stringify(response.paymentMethod));
+    res.send({ message: 'payment success', response: resp });
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'payment failed', error: error });
+  }
+});
+
+app.put('/payments/void', cors(corsOptions), async (req, res) => {
+  console.log('payment', req.body);
+  const amount = req.body.amount;
+  const transaction_id = req.body.transaction_id;
+  try{
+    const response = await Transaction.fromId(transaction_id)
+      .void()
+      // .execute();
+    console.log('success', response);
+    const resp = JSON.parse(JSON.stringify(response.paymentMethod));
+    res.send({ message: 'payment success', response: resp });
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'payment failed', error: error });
+  }
+});
+
+app.put('/payments/refund', cors(corsOptions), async (req, res) => {
+  console.log('payment', req.body);
+  const amount = req.body.amount;
+  const transaction_id = req.body.transactionId;
+  try{
+    const response = await Transaction.fromId(transaction_id)
+      .refund(amount)
+      // .execute();
+    console.log('success', response);
+    const resp = JSON.parse(JSON.stringify(response.paymentMethod));
+    res.send({ message: 'payment success', response: resp });
+  }catch(error){
+    console.log(error);
+    res.send({ message: 'payment failed', error: error });
+  }
+});
+
+
+
+let port = 8050;
+let ip = '0.0.0.0';
+app.listen(port, ip, () => {
+  console.log('Server started at on port ' + port + ' and ip ' + ip);
+});
+
+let's create a plan and let me know if you have any questions

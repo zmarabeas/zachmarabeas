@@ -1,0 +1,289 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Cuphead Dark Theme - Default (Noir/Shadow Style) */
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 263 70% 50.4%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 263 70% 50.4%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 263 70% 50.4%;
+  --radius: 0.5rem;
+  
+  /* Cuphead specific colors */
+  --cuphead-red: 0 70% 45%;
+  --cuphead-yellow: 45 90% 40%;
+  --cuphead-cream: 240 10% 3.9%;
+  --cuphead-brown: 30 40% 15%;
+  --cuphead-black: 0 0% 0%;
+}
+
+.light {
+  /* Cuphead Light Theme - 1930s Cartoon Style */
+  --background: 45 100% 96%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 24 95% 53%;
+  --primary-foreground: 60 9.1% 97.8%;
+  --secondary: 60 4.8% 95.9%;
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 24 95% 53%;
+  --accent-foreground: 60 9.1% 97.8%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 24 95% 53%;
+  
+  /* Cuphead light specific colors */
+  --cuphead-red: 0 85% 60%;
+  --cuphead-yellow: 45 100% 51%;
+  --cuphead-cream: 45 100% 96%;
+  --cuphead-brown: 30 67% 25%;
+  --cuphead-black: 0 0% 0%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  /* Cuphead-style headings */
+  h1, h2, h3 {
+    font-family: 'Fredoka One', cursive;
+    font-weight: 400;
+  }
+}
+
+/* Theme Transition Animation */
+.theme-transitioning {
+  transition: background-color 0.8s cubic-bezier(0.4, 0.0, 0.2, 1),
+              color 0.8s cubic-bezier(0.4, 0.0, 0.2, 1),
+              border-color 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.theme-transitioning * {
+  transition: background-color 0.8s cubic-bezier(0.4, 0.0, 0.2, 1),
+              color 0.8s cubic-bezier(0.4, 0.0, 0.2, 1),
+              border-color 0.8s cubic-bezier(0.4, 0.0, 0.2, 1),
+              box-shadow 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Cuphead Button Styles */
+.cuphead-button {
+  position: relative;
+  border: 3px solid hsl(var(--cuphead-black));
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cuphead-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.cuphead-button:active {
+  transform: translateY(0px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Cuphead Bounce Animation */
+@keyframes cuphead-bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+.cuphead-bounce {
+  animation: cuphead-bounce 2s ease-in-out infinite;
+}
+
+/* Theme Toggle Wobble Animation */
+@keyframes theme-wobble {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(-5deg); }
+  30% { transform: rotate(3deg); }
+  45% { transform: rotate(-3deg); }
+  60% { transform: rotate(2deg); }
+  75% { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.theme-wobble {
+  animation: theme-wobble 0.8s ease-in-out;
+}
+
+/* Binary Animation Styles */
+.binary-char {
+  @apply inline-block;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  text-shadow: 0 0 5px rgba(0, 140, 255, 0.3);
+}
+
+.binary-char::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.binary-char:has(+ .binary-char[style*="color: var(--primary)"]) {
+  opacity: 0.7;
+}
+
+.binary-char[style*="color: var(--primary)"] {
+  text-shadow: 0 0 8px var(--primary);
+}
+
+.binary-char[style*="color: var(--primary)"]::after {
+  width: 100%;
+}
+
+.binary-container {
+  font-family: 'Roboto Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* Project Card Styles */
+.project-card {
+  @apply relative overflow-hidden rounded-lg transition-all duration-300;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-card-overlay {
+  @apply absolute inset-0 bg-black bg-opacity-70 opacity-0 flex items-center justify-center transition-opacity duration-300;
+}
+
+.project-card:hover .project-card-overlay {
+  opacity: 1;
+}
+
+/* Skills Section */
+.skill-item {
+  @apply flex flex-col items-center p-4 rounded-lg transition-all duration-300;
+}
+
+.skill-item:hover {
+  @apply bg-accent/10;
+  transform: translateY(-5px);
+}
+
+/* Animated underline for nav links */
+.nav-link {
+  @apply relative;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  @apply w-full;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted/50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+/* Section transitions */
+.section {
+  @apply opacity-0 transition-all duration-500 ease-in-out transform translate-y-10;
+}
+
+.section.visible {
+  @apply opacity-100 translate-y-0;
+}
+
+.hero-section {
+  min-height: calc(100vh - 64px);
+}
+
+.section-title {
+  @apply text-4xl font-bold mb-8 inline-block relative;
+}
+
+.section-title::after {
+  content: '';
+  @apply absolute left-0 bottom-0 h-1 w-1/4 bg-primary;
+}
+
+/* Contact form */
+.form-input {
+  @apply bg-transparent border border-border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300;
+}
+
+/* Animation for tech icons */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}

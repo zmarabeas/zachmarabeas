@@ -1,0 +1,47 @@
+Zachary Marabeas
+zmarabeas@gmail.com - 734-751-0417 - github.com/zmarabeas
+Computer Science Student / Freelance Software Developer
+Summary
+Self-motivated and results-driven software developer with a strong technical background in
+full-stack development. 3+ years of freelance experience building efficiency-boosting solutions
+for businesses, with a focus on enhancing productivity and user engagement. Proficient in
+leading end-to-end development, from gathering requirements to deployment.
+Work Experience
+Software Developer, Great North Finance (March 2024 - Present)
+● Developed a responsive and engaging website that improved user engagement by 25%.
+● Built lead generation tools to enhance customer acquisition and productivity, integrating
+APIs for seamless data management.
+● Utilized JavaScript, Svelte, and Firebase for frontend and backend development,
+ensuring robust performance and scalability.
+Software Developer, T extBlaster (October 2023 - Present)
+● Developed a full-stack SMS automation app,
+“T extBlaster,
+” using Node.js, Svelte, and
+Firebase, delivering mass text messaging capabilities for businesses.
+● Integrated Twilio APIs for SMS dispatch, real-time analytics, and user management
+features.
+● Created a user-friendly dashboard for clients to manage their messaging campaigns
+efficiently.
+Software Developer, Primo’s Pizzeria POS System (February 2021 - August 2023)
+● Designed and built a full-stack Point of Sale (POS) system tailored to a local pizzeria’s
+needs, utilizing JavaScript, Svelte, and MongoDB.
+● Integrated Heartland API for secure online payment processing and developed features
+such as menu interfaces and customer data management.
+Instructor, Schoolcraft College (June 2018 - Present)
+● Led programming workshops and designed robotics projects focused on autonomous
+systems and controls, improving students’ grasp of STEM subjects.
+● Delivered instruction in JavaScript, Python, and Blocks for programming and robotics
+courses.
+Mentor, First Robotics (March 2016 - Present)
+● Guided teams through designing autonomous systems and controls for competitive
+robotics, fostering technical skills in programming and engineering.
+Education
+Wayne State University & Grand Valley State University
+● Bachelor of Computer Science (Graduating December 2025)
+Skills
+● Programming Languages: JavaScript, Svelte, Node.js, Python, C, HTML/CSS, Bash,
+Linux
+● Frameworks & T ools: MongoDB, Firebase, Twilio, APIs, UI/UX Design
+● Robotics Expertise: Arduino, CAN bus, Controls, Autonomy
+● Development Focus: Full-Stack Development, Automation, Productivity T ools, Lead
+Generation Solutions
