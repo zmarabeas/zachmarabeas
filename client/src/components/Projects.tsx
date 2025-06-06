@@ -8,9 +8,12 @@ const Projects = () => {
   const [filter, setFilter] = useState("all");
   
   // Fetch projects
-  const { data: projects = [], isLoading } = useQuery({
+  const { data: projects = [], isLoading, error } = useQuery({
     queryKey: ['/api/projects'],
   });
+
+  // Debug logging
+  console.log('Projects query result:', { projects, isLoading, error });
 
   // Filter projects based on selected category
   const filteredProjects = (projects as ProjectType[]).filter(project => {
