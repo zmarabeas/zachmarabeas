@@ -113,11 +113,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertContactSchema.parse(req.body);
       
-      // Here we'd typically save to the database
-      // For now, let's just log it and return success
-      console.log("Contact form submission:", validatedData);
+      // Log contact form submission with clear formatting
+      console.log("=== NEW CONTACT FORM SUBMISSION ===");
+      console.log(`From: ${validatedData.name} (${validatedData.email})`);
+      console.log(`Subject: ${validatedData.subject}`);
+      console.log(`Message: ${validatedData.message}`);
+      console.log(`Timestamp: ${new Date().toISOString()}`);
+      console.log("================================");
       
-      res.status(200).json({ message: "Message sent successfully" });
+      res.status(200).json({ 
+        message: "Thank you for your message! I'll get back to you soon." 
+      });
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res.status(400).json({ message: "Validation error", errors: error.format() });

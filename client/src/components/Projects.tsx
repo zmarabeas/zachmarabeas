@@ -12,9 +12,6 @@ const Projects = () => {
     queryKey: ['/api/projects'],
   });
 
-  // Debug logging
-  console.log('Projects query result:', { projects, isLoading, error });
-
   // Filter projects based on selected category
   const filteredProjects = (projects as ProjectType[]).filter(project => {
     if (filter === "all") return true;
@@ -26,7 +23,11 @@ const Projects = () => {
   };
 
   // All unique tags for filtering
-  const allTags = [...new Set((projects as ProjectType[]).flatMap(p => p.tags))];
+  const allTagsSet = new Set<string>();
+  (projects as ProjectType[]).forEach(project => {
+    project.tags.forEach(tag => allTagsSet.add(tag));
+  });
+  const allTags = Array.from(allTagsSet);
 
   return (
     <section id="projects" className="py-20 bg-muted/10 section">
@@ -58,11 +59,19 @@ const Projects = () => {
           ))}
         </div>
         
-        {isLoading ? (
+        {error ? (
+          <div className="text-center py-10">
+            <p className="text-red-500">Error loading projects: {error.message}</p>
+          </div>
+        ) : isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3].map(i => (
               <div key={i} className="bg-card/20 animate-pulse rounded-lg h-80"></div>
             ))}
+          </div>
+        ) : filteredProjects.length === 0 ? (
+          <div className="text-center py-10">
+            <p className="text-muted-foreground">No projects found with the selected filter.</p>
           </div>
         ) : (
           <>
@@ -77,12 +86,6 @@ const Projects = () => {
                 <Button onClick={loadMore} variant="outline">
                   Load More
                 </Button>
-              </div>
-            )}
-            
-            {filteredProjects.length === 0 && (
-              <div className="text-center py-10">
-                <p className="text-muted-foreground">No projects found with the selected filter.</p>
               </div>
             )}
           </>
