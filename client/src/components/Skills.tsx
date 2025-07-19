@@ -10,6 +10,7 @@ const Skills = () => {
     { name: "HTML5", icon: "devicon-html5-plain" },
     { name: "CSS3", icon: "devicon-css3-plain" },
     { name: "React", icon: "devicon-react-plain" },
+    { name: "Angular", icon: "devicon-angularjs-plain" },
     { name: "TypeScript", icon: "devicon-typescript-plain" },
   ];
 
@@ -17,6 +18,7 @@ const Skills = () => {
     { name: "Node.js", icon: "devicon-nodejs-plain" },
     { name: "Python", icon: "devicon-python-plain" },
     { name: "C", icon: "devicon-c-plain" },
+    { name: "C#/.NET", icon: "devicon-csharp-plain" },
     { name: "MongoDB", icon: "devicon-mongodb-plain" },
     { name: "Firebase", icon: "devicon-firebase-plain" },
     { name: "Linux", icon: "devicon-linux-plain" },
@@ -88,6 +90,7 @@ const Skills = () => {
                 <Badge variant="outline" className="bg-primary/10">HTML5</Badge>
                 <Badge variant="outline" className="bg-primary/10">CSS3</Badge>
                 <Badge variant="outline" className="bg-primary/10">React</Badge>
+                <Badge variant="outline" className="bg-primary/10">Angular</Badge>
                 <Badge variant="outline" className="bg-primary/10">TypeScript</Badge>
                 <Badge variant="outline" className="bg-primary/10">UI/UX Design</Badge>
               </div>
@@ -101,6 +104,7 @@ const Skills = () => {
                 <Badge variant="outline" className="bg-primary/10">Node.js</Badge>
                 <Badge variant="outline" className="bg-primary/10">Python</Badge>
                 <Badge variant="outline" className="bg-primary/10">C</Badge>
+                <Badge variant="outline" className="bg-primary/10">C#/.NET</Badge>
                 <Badge variant="outline" className="bg-primary/10">MongoDB</Badge>
                 <Badge variant="outline" className="bg-primary/10">Firebase</Badge>
                 <Badge variant="outline" className="bg-primary/10">APIs</Badge>
