@@ -5,6 +5,7 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
+import ResumeSection from "@/components/ResumeSection";
 import Footer from "@/components/Footer";
 import { setupScrollAnimations } from "@/lib/animation";
 
@@ -91,6 +92,7 @@ const Home = () => {
         />
         <About />
         <Skills />
+        <ResumeSection />
         <Projects />
         <Contact />
       </main>
